@@ -1,13 +1,5 @@
-
-
-
-
-
 $.fn.Sliding=function(){
-
-   
     let images=$(this)
-    
     console.log('two',images)
     let imgIndex=images.index(this);
     let overFlowElement = $(`
@@ -20,18 +12,11 @@ $.fn.Sliding=function(){
             <button class="btn right"><i class="fa-solid fa-angle-right"></i></button>
         </div>
     `);
-
-
-
-    
-    
-    
-    overFlowElement.fadeIn(500);
     $('body').append(overFlowElement);
-   
+    overFlowElement.fadeIn(500); 
 
-    
-    $('.right').on('click', function() {
+    function nextImg(){
+        
         $('.box').fadeOut(0);
         imgIndex++;
         if(imgIndex>=$(images).length){
@@ -43,11 +28,15 @@ $.fn.Sliding=function(){
         console.log($('img').eq(imgIndex).attr('src'))
 
         $('.box').find('img').attr('src',`${$(images).eq(imgIndex).attr('src')}`);
+    }
+
+    $('.right').on('click', function() {
+        nextImg();
         
 
     });
 
-    $('.left').on('click', function() {
+    function previousImg(){
         $('.box').fadeOut(0);
         imgIndex--;
         if(imgIndex<0){
@@ -55,7 +44,12 @@ $.fn.Sliding=function(){
         }
         $('.box').fadeIn(500);
         $('.box').find('img').attr('src',`${$(images).eq(imgIndex).attr('src')}`);
+    }
+
+    $('.left').on('click', function() {
+        previousImg();
     });
+   
 
     $('.close').on('click', function() {
         overFlowElement.fadeOut(500, function() {
@@ -63,15 +57,38 @@ $.fn.Sliding=function(){
         });
     });
 
+
+// ! key Board Navigation 
+
+    $(document).on('keydown', function (e){
+
+        if(e.originalEvent.key=='ArrowRight'){
+            nextImg();
+        }
+        else if(e.originalEvent.key=='ArrowLeft'){
+            previousImg();
+        }
+        else if(e.originalEvent.key=='Escape'){
+            overFlowElement.fadeOut(500, function() {
+                overFlowElement.remove();
+            });
+        }
+        console.log(e.keyCode)
+        console.log(e.originalEvent.key)
+
+    })
+
+
+
+
 }
-
-
 $('img').on('click', function() {
     
     console.log($(this).attr('src'))
     $('img').Sliding();
 
 })
+
 
 
 
