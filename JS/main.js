@@ -1,6 +1,6 @@
 $.fn.Sliding=function(){
     let images=$(this)
-    console.log('two',images)
+    console.log(images)
     let imgIndex=images.index(this);
     let overFlowElement = $(`
         <div class='overFlow'>
@@ -77,10 +77,6 @@ $.fn.Sliding=function(){
         console.log(e.originalEvent.key)
 
     })
-
-
-
-
 }
 $('img').on('click', function() {
     
@@ -88,55 +84,3 @@ $('img').on('click', function() {
     $('img').Sliding();
 
 })
-
-
-
-
-
-
-
-
-
-/* 
-$('img').on('click', function(){
-
-    let imgIndex=$('img').index(this);
-    console.log(imgIndex)
-
-    console.log($(this).attr('src'))
-    $('body').append(overFlowElement);
-    overFlowElement.fadeIn(500);
-    $('.box').html(`<img src="${this.src}" alt="" srcset="">`);
-
-    
-    $('.right').on('click', function() {
-        $('.box').fadeOut(0);
-        imgIndex++;
-        if(imgIndex>=$('img').length){
-            imgIndex=0;
-        }
-
-        $('.box').fadeIn(500);
-        $('.box').html(`<img src="${$('img').eq(imgIndex).attr('src')}" alt="" srcset="">`);
-
-    });
-
-    $('.left').on('click', function() {
-        $('.box').fadeOut(0);
-        imgIndex--;
-        if(imgIndex<0){
-            imgIndex=$('img').length-1;
-        }
-        $('.box').fadeIn(500);
-        $('.box').html(`<img src="${$('img').eq(imgIndex).attr('src')}" alt="" srcset="">`);
-    });
-
-
-
-    
-
-})
-
-
- */
-
